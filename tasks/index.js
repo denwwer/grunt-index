@@ -38,8 +38,6 @@ module.exports = function(grunt) {
         assetData.assets[name] = assets[k].replace(/^(dist|desc)/, '');
       }
 
-      grunt.log.writeln(assetData.assets);
-
       Object.assign(templateData, assetData);
     }
 
