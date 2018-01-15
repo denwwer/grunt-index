@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
     // Populate hashed assets
     if (options.assetsMap) {
-      var assets = grunt.file.readJSON(options.versions);
+      var assets = grunt.file.readJSON(options.assetsMap);
       var keys = Object.keys(assets);
       var assetData = { assets: {} };
 
