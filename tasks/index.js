@@ -23,6 +23,26 @@ module.exports = function(grunt) {
     var template = grunt.file.read(options.template);
     var templateData = this.data.templateData || {};
 
+    // Populate hashed assets
+    if (options.assetsMap) {
+      var assets = grunt.file.readJSON(options.versions);
+      var keys = Object.keys(assets);
+      var assetData = { assets: {} };
+
+      grunt.log.writeln('Replace assets to hashed version');
+
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        var path = k.split('/');
+        var name = path[path.length - 1].replace(/(\.\w+)$/, '');
+        assetData.assets[name] = assets[k].replace(/^(dist|desc)/, '');
+      }
+
+      grunt.log.writeln(assetData.assets);
+
+      Object.assign(templateData, assetData);
+    }
+
     if (typeof this.data.dest === 'undefined') {
       grunt.log.error('You have to specify a destination in your task configuration');
       return false;
