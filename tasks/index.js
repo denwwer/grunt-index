@@ -27,7 +27,12 @@ module.exports = function(grunt) {
     if (options.assetsMap) {
       var assets = grunt.file.readJSON(options.assetsMap);
       var keys = Object.keys(assets);
-      var assetData = { assets: {} };
+      var assetData = {
+        assets: {
+          css: {},
+          js: {}
+        }
+      };
 
       grunt.log.writeln('Replace assets to hashed version');
 
@@ -35,7 +40,13 @@ module.exports = function(grunt) {
         var k = keys[i];
         var path = k.split('/');
         var name = path[path.length - 1].replace(/(\.\w+)$/, '');
-        assetData.assets[name] = assets[k].replace(/^(dist|desc)/, '');
+        var ext = 'js';
+
+        if (k.match(/\.css$/)) {
+          ext = 'css';
+        }
+
+        assetData.assets[ext][name] = assets[k].replace(/^(dist|desc)/, '');
       }
 
       Object.assign(templateData, assetData);

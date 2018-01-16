@@ -48,7 +48,7 @@ Type: `String`
 Default value: `null`
 
 Path to mapping file between assets and their hashed locations,
-this map will be used to populate assets path in template using `assets` (`assets.[asset_name]`) Object.
+this map will be used to populate assets path in template using `assets` (`assets: {css: {}, js: {}}`) Object.
 
 ### Usage Examples
 
@@ -119,11 +119,11 @@ then inside `index.jst` using `assets` Object write
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" media="screen" href="{{=it.assets.style}}"/>
+  <link rel="stylesheet" media="screen" href="{{=it.assets.css.style}}"/>
 </head>
 <body>
-  <script src="{{=it.assets.templates}}"></script>
-  <script src="{{=it.assets.app}}"></script>
+  <script src="{{=it.assets.js.templates}}"></script>
+  <script src="{{=it.assets.js.app}}"></script>
 </body>
 </html>
 ```
