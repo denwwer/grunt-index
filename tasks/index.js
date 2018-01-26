@@ -39,7 +39,8 @@ module.exports = function(grunt) {
       for (var i = 0; i < keys.length; i++) {
         var k = keys[i];
         var path = k.split('/');
-        var name = path[path.length - 1].replace(/(\.\w+)$/, '');
+        // Match app.min.js => app
+        var name = path[path.length - 1].match(/^[a-zA-Z]+/)[0];
         var ext = 'js';
 
         if (k.match(/\.css$/)) {
